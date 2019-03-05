@@ -5,67 +5,77 @@ questions:
 - "What data are we using?"
 - "Why is this experiment important?"
 objectives:
-- "Why study *E. coli*?"
-- "Understand the data set"
-- "What is hypermutability?"
+- Think about biological reality beyond .fq files
+keypoints:
+- Epichloe is are awesome
+- Metadata associated with a project shuold contain all the key biological
+  information need to make senese of the experiment and guide the analysis
 ---
+
 
 # Background
 
-We are going to use a long-term sequencing dataset from a population of *Escherichia coli*. 
+We are going to use an RNA seq data set from  _Epichloë canadensis_, a polyploid
+fungus.
 
- - **What is *E. coli*?**
-    - *E. coli* are rod-shaped bacteria that can survive under a wide variety of conditions including variable temperatures, nutrient availability, and oxygen levels. Most strains are harmless, but some are associated with food-poisoning. 
+ - **What is *Epichloe*?**
+    - *Epicloe* are fungi that live in close association with pasture
+      grasses. They form "defensive mutualisms" with their hosts, which is to
+      say they exchange a place to live and plentiful supply of sugar for an
+      array of chemicals that protect the grasses from pests.
     
-![ [Wikimedia](https://species.wikimedia.org/wiki/Escherichia_coli#/media/File:EscherichiaColi_NIAID.jpg) ](../img/172px-EscherichiaColi_NIAID.jpg)
 
-<!-- https://species.wikimedia.org/wiki/Escherichia_coli#/media/File:EscherichiaColi_NIAID.jpg -->
-
- - **Why is *E. coli* important?**
-    - *E. coli* are one of the most well-studied model organisms in science. As a single-celled organism, *E. coli* reproduces rapidly, typically doubling its population every 20 minutes, which means it can be manipulated easily in experiments. In addition, most naturally occurring strains of *E. coli* are harmless. Most importantly, the genetics of *E. coli* are fairly well understood and can be manipulated to study adaptation and evolution.
+ - **Why is *Epichloë* important?**
+    - Because *Epichloë* help pasture grasses, and New Zealand grows a lot of
+      cows, there is a great deal of interest n developing agricultrually
+      benficial _Epichloë_ strains.
+    - All of the lab, genomic and genetic resources availble to _Epichloe_ also
+      make it a great model system in which to study, host-fungal interactions 
+      and evolutionary biology.
     
 # The Data
 
- - The data we are going to use is part of a long-term evolution experiment led by [Richard Lenski](https://en.wikipedia.org/wiki/E._coli_long-term_evolution_experiment).
+ - The data we are going to use is taken from 3 Epichloe species, one of which
+   is a polyploid generated from the other two
  
- - The experiment was designed to assess adaptation in *E. coli*. A population was propagated for more than 40,000 generations in a glucose-limited minimal medium (in most conditions glucose is the best carbon source for *E. coli*, providing faster growth than other sugars). This medium was supplemented with citrate which *E. coli* cannot metabolize in the aerobic conditions of the experiment. Sequencing of the populations at regular time points reveals that spontaneous citrate-using variant (**Cit+**) appeared between 31,000 and 31,500 generations causing an increase in population size and diversity. In addition, this experiment showed hypermutability in certain regions. Hypermutability is important and can help accelerate adaptation to novel environments, but also can be selected against in well-adapted populations.
- 
- - To see a timeline of the experiment to date, check out this [figure](https://en.wikipedia.org/wiki/E._coli_long-term_evolution_experiment#/media/File:LTEE_Timeline_as_of_May_28,_2016.png), and this paper [Blount et al. 2008: Historical contingency and the evolution of a key innovation in an experimental population of *Escherichia coli*](http://www.pnas.org/content/105/23/7899).
- 
+ - The experiment was designed to assess how the gene expression changes in the
+   hybrid species compared to its' parents. We grew all of the species in their
+   natural grass hosts under controleld conditions, and generated whole
+   transcriptome data from the infected tissue (i.e. plant and fungal reads
+   together). 
  
 ## View the Metadata
 
-We will be working with three sample events from the **Ara-3** strain of this experiment, one from 5,000 generations, one from 15,000 generations, and one from 50,000 generations. The population changed substantially during the course of the experiment, and we will be exploring how (the evolution of a **Cit+** mutant and **hypermutability**) with our variant calling workflow. The metadata file associated with this lesson can be [downloaded directly here](https://raw.githubusercontent.com/data-lessons/wrangling-genomics/gh-pages/files/Ecoli_metadata_composite.csv) or [viewed in Github](https://github.com/data-lessons/wrangling-genomics/blob/gh-pages/files/Ecoli_metadata_composite.csv). If you would like to know details of how the file was created, you can look at [some notes and sources here](https://github.com/data-lessons/wrangling-genomics/blob/gh-pages/files/Ecoli_metadata_composite_README.md).
+We ahve already investigated some of the metadata. This describes both the
+experimental conditions (spp, ploidy, treament, genotype) and some technical
+details about the RNAseq data we generated. Note, these files contain only a
+subset of the RNAseq data, we would usually produce > 10 million reads per
+biological replicate.
 
 
-
-This metadata describes information on the *Ara-3* clones and the columns represent:
-
-| Column           | Description                                |
-|------------------|--------------------------------------------|
-| strain           | strain name					|
-| generation       | generation when sample frozen		|
-| clade            | based on parsimony-based tree		|
-| reference        | study the samples were originally sequenced for				|
-| population       | ancestral population group |
-| mutator          | hypermutability mutant status |
-| facility         | facility samples were sequenced at |
-| run              | Sequence read archive sample ID		|
-| read_type        | library type of reads |
-| read_length      | length of reads in sample |
-| sequencing_depth | depth of sequencing |
-| cit              | citrate-using mutant status		|
-
+|file       |sample_id |spp | ploidy|treatment |genotype |read_type | insert_size| nreads|
+|:----------|:---------|:---|------:|:---------|:--------|:---------|-----------:|------:|
+|Ecan_01.fq |Ecan_01   |Eam |      1|planta    |WT       |SE        |         500|  74269|
+|Ecan_02.fq |Ecan_02   |Eam |      1|planta    |WT       |SE        |         500|  11886|
+|Ecan_03.fq |Ecan_03   |Eam |      1|planta    |WT       |SE        |         500|   9359|
+|Ecan_04.fq |Ecan_04   |Eam |      1|planta    |WT       |SE        |         500|   8799|
+|Ecan_05.fq |Ecan_05   |Eel |      1|planta    |WT       |SE        |         500|   5932|
+|Ecan_06.fq |Ecan_06   |Eel |      1|planta    |WT       |SE        |         500|  10025|
+|Ecan_07.fq |Ecan_07   |Eel |      1|planta    |WT       |SE        |         500|   4983|
+|Ecan_08.fq |Ecan_08   |Eel |      1|planta    |WT       |SE        |         500|   4641|
+|Ecan_09.fq |Ecan_09   |H1  |      2|planta    |WT       |SE        |         500|   3681|
+|Ecan_10.fq |Ecan_10   |H1  |      2|planta    |WT       |SE        |         500|  26339|
+|Ecan_11.fq |Ecan_11   |H1  |      2|planta    |WT       |SE        |         500|  72633|
+|Ecan_12.fq |Ecan_12   |H2  |      2|planta    |WT       |SE        |         500|  67063|
+|Ecan_13.fq |Ecan_13   |H2  |      2|planta    |WT       |SE        |         500|  38359|
+|Ecan_14.fq |Ecan_14   |H2  |      2|planta    |WT       |SE        |         500|   2160|
 
 ### Challenge
 
 Based on the metadata, can you answer the following questions?
 
-* How many different generations exist in the data?
-* How many rows and how many columns are in this data?
-* How many citrate+ mutants have been recorded in **Ara-3**?
-* How many hypermutable mutants have been recorded in **Ara-3**?
-
+* How many biological replicates exist per species?
+* Why is it important to have such replicates?
 
 <!-- can add some additional info relevant to interplay of hypermutability and Cit+ adaptations, but keep it simple for now -->
 
